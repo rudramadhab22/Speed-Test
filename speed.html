@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internet Speed Test</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fa;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 40px;
+      color: #5c6bc0;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      transform: translateY(-10px);
+      text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Button Style */
+    button {
+      background-color: #5c6bc0;
+      color: white;
+      font-size: 1.5em;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
+    }
+
+    button:hover {
+      background-color: #3f4a99;
+      transform: translateY(-8px); /* Enhanced 3D effect on hover */
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    button:active {
+      transform: translateY(3px); /* Slight press down on click */
+    }
+
+    /* Loader and Result Styles */
+    #loader {
+      font-size: 1.5em;
+      color: #ff9800;
+      display: none;
+      margin-top: 20px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .result p {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #333;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+
+    .result span {
+      font-weight: bold;
+      color: #5c6bc0;
+      font-size: 2.5em;
+    }
+
+    /* Smooth Hover Effect on Results */
+    .result p:hover {
+      transform: translateY(-10px); /* 3D effect on hover */
+      opacity: 1;
+    }
+
+    /* 3D Card-like Effect for the Main Container */
+    .container {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(0);
+      transition: all 0.4s ease-out;
+    }
+
+    .container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      button {
+        font-size: 1.2em;
+        padding: 15px 40px;
+      }
+
+      .result p {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Check Your Internet Speed</h1>
+    <button id="start">Start Speed Test</button>
+    <p id="loader">Testing...</p>
+    <div class="result">
+      <p>Download Speed: <span id="download">--</span> Mbps</p>
+      <p>Upload Speed: <span id="upload">--</span> Mbps</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("start").addEventListener("click", function() {
+      // Show loader with smooth transition
+      const loader = document.getElementById("loader");
+      loader.style.display = "block";
+      loader.style.opacity = 1;
+      loader.style.transform = "translateY(0)";
+      document.getElementById("download").textContent = "--"; // Clear previous result
+      document.getElementById("upload").textContent = "--"; // Clear previous result
+
+      // Simulate speed test
+      setTimeout(function() {
+        // Generate random download and upload speeds between 5 and 100 Mbps
+        const downloadSpeed = (Math.random() * (100 - 5) + 5).toFixed(2);
+        const uploadSpeed = (Math.random() * (100 - 5) + 5).toFixed(2);
+
+        // Hide loader with smooth transition
+        loader.style.opacity = 0;
+        loader.style.transform = "translateY(-10px)";
+
+        // Show results with smooth transition
+        document.getElementById("download").textContent = downloadSpeed; // Update download speed
+        document.getElementById("upload").textContent = uploadSpeed; // Update upload speed
+
+        // Reveal results with smooth transition
+        const results = document.querySelectorAll(".result p");
+        results.forEach(function(result, index) {
+          setTimeout(function() {
+            result.style.opacity = 1;
+            result.style.transform = "translateY(0)";
+          }, 300 * index);
+        });
+      }, 3000); // Simulate a 3-second test duration
+    });
+  </script>
+</body>
+</html>
